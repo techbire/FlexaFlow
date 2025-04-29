@@ -1,0 +1,1044 @@
+<!-- examples/advanced.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexaFlow Advanced Demo</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../dist/flexaflow.min.css">
+  <style>
+    body {
+      font-family: var(--ff-font-family-sans);
+      color: var(--ff-text-color);
+      background-color: var(--ff-gray-50);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .header {
+      background-color: var(--ff-primary-color);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .section {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: var(--ff-shadow-md);
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+    }
+    
+    .section-title {
+      color: var(--ff-primary-color);
+      margin-top: 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--ff-border-color);
+    }
+    
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--ff-gray-800);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--ff-shadow-lg);
+      z-index: 10;
+    }
+    
+    .code-block {
+      background: var(--ff-gray-800);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow: auto;
+      font-family: var(--ff-font-family-mono);
+      font-size: 14px;
+      margin: 1rem 0;
+    }
+    
+    .task-app {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: var(--ff-shadow-md);
+      padding: 1.5rem;
+    }
+    
+    .task-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    
+    .task-item {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--ff-border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .task-item:last-child {
+      border-bottom: none;
+    }
+    
+    .task-checkbox {
+      margin-right: 0.75rem;
+    }
+    
+    .task-completed {
+      text-decoration: line-through;
+      color: var(--ff-gray-500);
+    }
+    
+    .navbar {
+      background-color: var(--ff-primary-color);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem;
+    }
+    
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">FlexaFlow Demo</div>
+    <div class="nav-links">
+      <a href="basic.html">Basic</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="#" id="open-login-modal">Login</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>FlexaFlow Advanced Components</h1>
+    <p>A comprehensive demo of the FlexaFlow UI library's advanced capabilities</p>
+  </header>
+
+  <div class="container">
+    <!-- Task Manager Demo App -->
+    <section class="section">
+      <h2 class="section-title">Task Manager Demo App</h2>
+      <p>A complete working application built with FlexaFlow components</p>
+      
+      <div class="task-app">
+        <h3>My Tasks</h3>
+        
+        <div class="button-container">
+          <button id="add-task-btn" class="ff-btn ff-btn-primary">
+            <i class="fas fa-plus"></i> Add New Task
+          </button>
+          <button id="filter-all-btn" class="ff-btn ff-btn-secondary ff-active">All</button>
+          <button id="filter-active-btn" class="ff-btn ff-btn-secondary">Active</button>
+          <button id="filter-completed-btn" class="ff-btn ff-btn-secondary">Completed</button>
+        </div>
+        
+        <ul id="task-list" class="task-list">
+          <!-- Tasks will be inserted here -->
+        </ul>
+        
+        <div id="task-stats" class="mt-4 text-sm text-gray-500">
+          <!-- Task statistics will be displayed here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Notification Section -->
+    <section class="section">
+      <h2 class="section-title">Toast Notifications</h2>
+      <p>Customizable toast notification system with different types and positions</p>
+      
+      <div class="button-container">
+        <button id="success-toast" class="ff-btn ff-btn-success">Success Toast</button>
+        <button id="error-toast" class="ff-btn ff-btn-danger">Error Toast</button>
+        <button id="info-toast" class="ff-btn ff-btn-info">Info Toast</button>
+        <button id="warning-toast" class="ff-btn ff-btn-warning">Warning Toast</button>
+      </div>
+      
+      <div class="mt-4">
+        <label for="toast-position">Position:</label>
+        <select id="toast-position" class="ff-select">
+          <option value="top-right">Top Right</option>
+          <option value="top-left">Top Left</option>
+          <option value="bottom-right" selected>Bottom Right</option>
+          <option value="bottom-left">Bottom Left</option>
+          <option value="top-center">Top Center</option>
+          <option value="bottom-center">Bottom Center</option>
+        </select>
+      </div>
+      
+      <div class="code-block">
+<pre>// Initialize toast system with custom options
+const toast = new FlexaFlow.Toast({
+  position: 'bottom-right',
+  duration: 5000,
+  animation: 'slide'
+});
+
+// Show different types of toasts
+toast.success('Operation completed successfully!');
+toast.error('An error occurred');
+toast.info('New update available');
+toast.warning('Please save your work');</pre>
+      </div>
+    </section>
+
+    <!-- Modal Dialog Section -->
+    <section class="section">
+      <h2 class="section-title">Modal Dialogs</h2>
+      <p>Flexible and accessible modal dialog system with various options</p>
+      
+      <div class="button-container">
+        <button id="basic-modal" class="ff-btn ff-btn-primary">Basic Modal</button>
+        <button id="form-modal" class="ff-btn ff-btn-primary">Form Modal</button>
+        <button id="confirm-modal" class="ff-btn ff-btn-danger">Confirm Modal</button>
+        <button id="image-modal" class="ff-btn ff-btn-info">Image Modal</button>
+        <button id="draggable-modal" class="ff-btn ff-btn-secondary">Draggable Modal</button>
+      </div>
+      
+      <div class="code-block">
+<pre>// Initialize modal system
+const modal = new FlexaFlow.Modal({
+  animated: true,
+  closeOnEscape: true
+});
+
+// Create a modal with custom options
+const myModal = modal.create({
+  id: 'example-modal',
+  title: 'Modal Title',
+  content: 'This is a customizable modal dialog.',
+  buttons: [
+    { text: 'Cancel', type: 'secondary', action: 'close' },
+    { text: 'Confirm', type: 'primary', callback: () => console.log('Confirmed!') }
+  ]
+});</pre>
+      </div>
+    </section>
+
+    <!-- Dropdown Menu Section -->
+    <section class="section">
+      <h2 class="section-title">Dropdown Menu</h2>
+      <p>Customizable dropdown menu component with various positioning options</p>
+      
+      <div class="button-container">
+        <button id="dropdown-demo" class="ff-btn ff-btn-secondary">
+          Options <i class="fas fa-chevron-down ml-2"></i>
+        </button>
+        
+        <button id="dropdown-user" class="ff-btn ff-btn-primary">
+          <i class="fas fa-user mr-2"></i> User Menu
+        </button>
+      </div>
+      
+      <div class="code-block">
+<pre>// Create a dropdown with custom options
+const dropdown = new FlexaFlow.Dropdown('#dropdown-trigger', {
+  items: [
+    { text: 'Profile', value: 'profile', icon: 'user' },
+    { text: 'Settings', value: 'settings', icon: 'cog' },
+    { type: 'divider' },
+    { text: 'Logout', value: 'logout', icon: 'sign-out-alt' }
+  ],
+  placement: 'bottom-start',
+  onSelect: (item) => console.log(`Selected: ${item.value}`)
+});</pre>
+      </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <section class="section">
+      <h2 class="section-title">Tabs</h2>
+      <p>Flexible and accessible tab component with keyboard navigation</p>
+      
+      <div class="mt-4" id="tabs-container">
+        <div role="tablist" class="ff-tabs-list">
+          <button role="tab" id="tab1" class="ff-tab">First Tab</button>
+          <button role="tab" id="tab2" class="ff-tab">Second Tab</button>
+          <button role="tab" id="tab3" class="ff-tab">Third Tab</button>
+        </div>
+        
+        <div role="tabpanel" id="panel1" class="ff-tab-panel p-4">
+          <h3>First Tab Content</h3>
+          <p>This is the content for the first tab. You can include any content here.</p>
+        </div>
+        
+        <div role="tabpanel" id="panel2" class="ff-tab-panel p-4">
+          <h3>Second Tab Content</h3>
+          <p>This is the content for the second tab with different information.</p>
+        </div>
+        
+        <div role="tabpanel" id="panel3" class="ff-tab-panel p-4">
+          <h3>Third Tab Content</h3>
+          <p>This is the content for the third tab. Each tab can have unique content.</p>
+        </div>
+      </div>
+      
+      <div class="code-block">
+<pre>// Initialize tabs
+const tabs = new FlexaFlow.Tabs('#tabs-container', {
+  activeTab: 'tab1',
+  onChange: (tabId) => console.log(`Tab changed to: ${tabId}`)
+});</pre>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="section">
+      <h2 class="section-title">Cards</h2>
+      <p>Versatile card components for displaying content in an organized way</p>
+      
+      <div class="demo-grid" id="cards-container">
+        <!-- Cards will be inserted here by JavaScript -->
+      </div>
+      
+      <div class="code-block">
+<pre>// Create a card with custom options
+const card = new FlexaFlow.Card({
+  title: 'Card Title',
+  content: 'Card content goes here with any HTML.',
+  footer: 'Card Footer',
+  image: 'path/to/image.jpg',
+  hover: true,
+  shadow: 'md'
+});</pre>
+      </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="section">
+      <h2 class="section-title">Filters</h2>
+      <p>Category filter system for organizing and filtering content</p>
+      
+      <div id="filter-container" class="mt-4">
+        <!-- Filters will be inserted here by JavaScript -->
+      </div>
+      
+      <div id="filter-results" class="mt-4 demo-grid">
+        <!-- Filtered results will appear here -->
+      </div>
+      
+      <div class="code-block">
+<pre>// Initialize filter system
+const filters = new FlexaFlow.Filters('#filter-container', {
+  categories: [
+    { id: 'all', name: 'All' },
+    { id: 'category1', name: 'Category 1' },
+    { id: 'category2', name: 'Category 2' }
+  ],
+  active: 'all',
+  onChange: (categoryId) => {
+    // Implement filtering logic
+    console.log(`Filter changed to: ${categoryId}`);
+  }
+});</pre>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Login Modal Template -->
+  <div data-ff-modal="login-modal" data-ff-modal-title="User Login">
+    <form id="login-form" class="ff-form">
+      <div class="ff-form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" class="ff-input" required>
+      </div>
+      <div class="ff-form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="ff-input" required>
+      </div>
+      <div class="ff-form-check">
+        <input type="checkbox" id="remember" class="ff-checkbox">
+        <label for="remember">Remember me</label>
+      </div>
+      <div class="ff-form-footer">
+        <button type="button" class="ff-btn ff-btn-secondary" data-ff-close>Cancel</button>
+        <button type="submit" class="ff-btn ff-btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Dark Mode Toggle -->
+  <button class="dark-mode-toggle" id="dark-mode-toggle">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <script src="../dist/flexaflow.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize FlexaFlow
+      FlexaFlow.init();
+      
+      // Initialize components
+      initToastDemo();
+      initModalDemo();
+      initDropdownDemo();
+      initTabsDemo();
+      initCardDemo();
+      initFilterDemo();
+      initTaskApp();
+      initDarkModeToggle();
+      
+      // Toast Notifications Demo
+      function initToastDemo() {
+        const toast = new FlexaFlow.Toast({
+          position: document.getElementById('toast-position').value
+        });
+        
+        document.getElementById('success-toast').addEventListener('click', () => {
+          toast.success('Operation completed successfully!');
+        });
+        
+        document.getElementById('error-toast').addEventListener('click', () => {
+          toast.error('An error occurred. Please try again.');
+        });
+        
+        document.getElementById('info-toast').addEventListener('click', () => {
+          toast.info('This is an informational message.');
+        });
+        
+        document.getElementById('warning-toast').addEventListener('click', () => {
+          toast.warning('Please save your work before leaving.');
+        });
+        
+        document.getElementById('toast-position').addEventListener('change', (e) => {
+          toast.options.position = e.target.value;
+        });
+      }
+      
+      // Modal Dialogs Demo
+      function initModalDemo() {
+        const modal = new FlexaFlow.Modal();
+        
+        // Basic Modal
+        document.getElementById('basic-modal').addEventListener('click', () => {
+          const basicModal = modal.create({
+            id: 'basic-modal-demo',
+            title: 'Basic Modal',
+            content: '<p>This is a basic modal with a title and content.</p>',
+            buttons: [
+              { text: 'Close', type: 'secondary', action: 'close' }
+            ]
+          });
+          
+          basicModal.open();
+        });
+        
+        // Form Modal
+        document.getElementById('form-modal').addEventListener('click', () => {
+          const formModal = modal.create({
+            id: 'form-modal-demo',
+            title: 'Contact Form',
+            content: `
+              <form id="contact-form">
+                <div class="ff-form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" class="ff-input" required>
+                </div>
+                <div class="ff-form-group">
+                  <label for="contact-email">Email</label>
+                  <input type="email" id="contact-email" class="ff-input" required>
+                </div>
+                <div class="ff-form-group">
+                  <label for="message">Message</label>
+                  <textarea id="message" class="ff-textarea" rows="4" required></textarea>
+                </div>
+              </form>
+            `,
+            buttons: [
+              { text: 'Cancel', type: 'secondary', action: 'close' },
+              { 
+                text: 'Submit', 
+                type: 'primary', 
+                callback: () => {
+                  const name = document.getElementById('name').value;
+                  const email = document.getElementById('contact-email').value;
+                  const message = document.getElementById('message').value;
+                  
+                  if (name && email && message) {
+                    const toast = new FlexaFlow.Toast();
+                    toast.success('Form submitted successfully!');
+                    formModal.close();
+                  } else {
+                    const toast = new FlexaFlow.Toast();
+                    toast.error('Please fill in all fields');
+                  }
+                }
+              }
+            ]
+          });
+          
+          formModal.open();
+        });
+        
+        // Confirm Modal
+        document.getElementById('confirm-modal').addEventListener('click', () => {
+          const confirmModal = modal.create({
+            id: 'confirm-modal-demo',
+            title: 'Confirm Action',
+            content: '<p>Are you sure you want to delete this item? This action cannot be undone.</p>',
+            buttons: [
+              { text: 'Cancel', type: 'secondary', action: 'close' },
+              { 
+                text: 'Delete', 
+                type: 'danger', 
+                callback: () => {
+                  const toast = new FlexaFlow.Toast();
+                  toast.success('Item deleted successfully!');
+                  confirmModal.close();
+                }
+              }
+            ]
+          });
+          
+          confirmModal.open();
+        });
+        
+        // Image Modal
+        document.getElementById('image-modal').addEventListener('click', () => {
+          const imageModal = modal.create({
+            id: 'image-modal-demo',
+            showHeader: false,
+            content: `
+              <div style="text-align: center;">
+                <img src="https://picsum.photos/800/500" alt="Random image" style="max-width: 100%; border-radius: 8px;">
+                <p style="margin-top: 1rem;">Example of a modal with an image.</p>
+              </div>
+            `,
+            buttons: [
+              { text: 'Close', type: 'secondary', action: 'close' }
+            ]
+          });
+          
+          imageModal.open();
+        });
+        
+        // Draggable Modal
+        document.getElementById('draggable-modal').addEventListener('click', () => {
+          const draggableModal = modal.create({
+            id: 'draggable-modal-demo',
+            title: 'Draggable Modal',
+            content: '<p>Click and drag the header to move this modal.</p><p>You can position this modal anywhere on the screen.</p>',
+            draggable: true,
+            buttons: [
+              { text: 'Close', type: 'secondary', action: 'close' }
+            ]
+          });
+          
+          draggableModal.open();
+        });
+        
+        // Login modal trigger
+        document.getElementById('open-login-modal').addEventListener('click', (e) => {
+          e.preventDefault();
+          document.querySelector('[data-ff-modal-trigger="login-modal"]').click();
+        });
+      }
+      
+      // Dropdown Menu Demo
+      function initDropdownDemo() {
+        // Basic dropdown
+        const dropdown = new FlexaFlow.Dropdown('#dropdown-demo', {
+          items: [
+            { text: 'Edit Item', value: 'edit', icon: 'edit' },
+            { text: 'Duplicate Item', value: 'duplicate', icon: 'copy' },
+            { text: 'Share Item', value: 'share', icon: 'share' },
+            { type: 'divider' },
+            { text: 'Delete Item', value: 'delete', icon: 'trash-alt', disabled: false }
+          ],
+          onSelect: (item) => {
+            const toast = new FlexaFlow.Toast();
+            toast.info(`Selected: ${item.text}`);
+          }
+        });
+        
+        // User dropdown
+        const userDropdown = new FlexaFlow.Dropdown('#dropdown-user', {
+          items: [
+            { text: 'Profile', value: 'profile', icon: 'user' },
+            { text: 'Account Settings', value: 'settings', icon: 'cog' },
+            { text: 'Activity Log', value: 'activity', icon: 'history' },
+            { type: 'divider' },
+            { text: 'Logout', value: 'logout', icon: 'sign-out-alt' }
+          ],
+          placement: 'bottom-end',
+          onSelect: (item) => {
+            const toast = new FlexaFlow.Toast();
+            toast.info(`Selected: ${item.text}`);
+          }
+        });
+      }
+      
+      // Tabs Demo
+      function initTabsDemo() {
+        const tabs = new FlexaFlow.Tabs('#tabs-container', {
+          activeTab: 'tab1',
+          animation: true,
+          onChange: (tabId) => {
+            console.log(`Active tab: ${tabId}`);
+          }
+        });
+      }
+      
+      // Cards Demo
+      function initCardDemo() {
+        const cardsContainer = document.getElementById('cards-container');
+        
+        // Sample card data
+        const cardData = [
+          {
+            title: 'Basic Card',
+            content: 'This is a basic card with minimal styling.',
+            image: 'https://picsum.photos/id/1018/600/300',
+            footer: 'Last updated 3 mins ago'
+          },
+          {
+            title: 'Card with Actions',
+            content: 'This card has action buttons in the footer.',
+            image: 'https://picsum.photos/id/1015/600/300',
+            actions: [
+              { text: 'Share', icon: 'share' },
+              { text: 'View', icon: 'eye' }
+            ]
+          },
+          {
+            title: 'Card with Badge',
+            content: 'This card displays a status badge.',
+            image: 'https://picsum.photos/id/1019/600/300',
+            badge: { text: 'New', type: 'success' }
+          }
+        ];
+        
+        // Create cards
+        cardData.forEach((data, index) => {
+          const card = new FlexaFlow.Card({
+            title: data.title,
+            content: data.content,
+            image: data.image,
+            footer: data.footer || '',
+            badge: data.badge || null,
+            actions: data.actions || [],
+            shadow: 'md',
+            hover: true,
+            animation: index === 0 ? 'fade-in' : (index === 1 ? 'slide-up' : 'scale-in'),
+            stretch: true
+          });
+          
+          // Append card to container
+          const cardElement = card.card;
+          cardsContainer.appendChild(cardElement);
+        });
+      }
+      
+      // Filter Demo
+      function initFilterDemo() {
+        const filters = new FlexaFlow.Filters('#filter-container', {
+          categories: [
+            { id: 'all', name: 'All Items' },
+            { id: 'nature', name: 'Nature' },
+            { id: 'architecture', name: 'Architecture' },
+            { id: 'people', name: 'People' },
+            { id: 'animals', name: 'Animals' }
+          ],
+          active: 'all',
+          onChange: (categoryId) => {
+            filterResults(categoryId);
+          }
+        });
+        
+        // Sample items for filtering
+        const items = [
+          { id: 1, category: 'nature', title: 'Mountain Landscape', image: 'https://picsum.photos/id/1018/300/200' },
+          { id: 2, category: 'architecture', title: 'Modern Building', image: 'https://picsum.photos/id/1011/300/200' },
+          { id: 3, category: 'people', title: 'Person on Mountain', image: 'https://picsum.photos/id/1012/300/200' },
+          { id: 4, category: 'animals', title: 'Lion', image: 'https://picsum.photos/id/1074/300/200' },
+          { id: 5, category: 'nature', title: 'Forest', image: 'https://picsum.photos/id/1043/300/200' },
+          { id: 6, category: 'architecture', title: 'City Skyline', image: 'https://picsum.photos/id/1016/300/200' }
+        ];
+        
+        function filterResults(categoryId) {
+          const resultsContainer = document.getElementById('filter-results');
+          resultsContainer.innerHTML = '';
+          
+          // Filter items
+          const filteredItems = categoryId === 'all' 
+            ? items 
+            : items.filter(item => item.category === categoryId);
+          
+          if (filteredItems.length === 0) {
+            resultsContainer.innerHTML = '<div class="text-center py-8"><p>No items found in this category</p></div>';
+            return;
+          }
+          
+          // Display filtered items
+          filteredItems.forEach(item => {
+            const itemCard = document.createElement('div');
+            itemCard.className = 'card';
+            itemCard.innerHTML = `
+              <div class="ff-card ff-overflow-hidden ff-rounded-lg ff-shadow-md ff-bg-white">
+                <div class="ff-relative">
+                  <img src="${item.image}" alt="${item.title}" class="ff-w-full ff-h-auto">
+                  <div class="ff-absolute ff-top-2 ff-right-2 ff-bg-primary-500 ff-text-white ff-px-2 ff-py-1 ff-rounded ff-text-xs">${item.category}</div>
+                </div>
+                <div class="ff-p-4">
+                  <h3 class="ff-text-lg ff-font-bold ff-mb-2">${item.title}</h3>
+                  <p class="ff-text-gray-600">Item #${item.id}</p>
+                </div>
+              </div>
+            `;
+            
+            resultsContainer.appendChild(itemCard);
+          });
+        }
+        
+        // Initialize with all items
+        filterResults('all');
+      }
+      
+      // Task App Demo
+      function initTaskApp() {
+        const taskList = document.getElementById('task-list');
+        const addTaskBtn = document.getElementById('add-task-btn');
+        const filterAllBtn = document.getElementById('filter-all-btn');
+        const filterActiveBtn = document.getElementById('filter-active-btn');
+        const filterCompletedBtn = document.getElementById('filter-completed-btn');
+        const taskStats = document.getElementById('task-stats');
+        
+        // Initialize toast
+        const toast = new FlexaFlow.Toast();
+        
+        // Sample tasks
+        let tasks = [
+          { id: 1, text: 'Learn FlexaFlow UI library', completed: true },
+          { id: 2, text: 'Create a sample project', completed: false },
+          { id: 3, text: 'Add custom components', completed: false }
+        ];
+        
+        let currentFilter = 'all';
+        
+        // Load tasks
+        function loadTasks(filter = 'all') {
+          currentFilter = filter;
+          
+          // Filter tasks based on current filter
+          let filteredTasks;
+          if (filter === 'active') {
+            filteredTasks = tasks.filter(t => !t.completed);
+          } else if (filter === 'completed') {
+            filteredTasks = tasks.filter(t => t.completed);
+          } else {
+            filteredTasks = [...tasks];
+          }
+          
+          // Clear task list
+          taskList.innerHTML = '';
+          
+          // Add tasks to list
+          filteredTasks.forEach(task => {
+            const taskItem = document.createElement('li');
+            taskItem.className = 'task-item';
+            taskItem.innerHTML = `
+              <div class="ff-flex ff-items-center">
+                <input type="checkbox" class="task-checkbox ff-checkbox" id="task-${task.id}" 
+                  ${task.completed ? 'checked' : ''}>
+                <label for="task-${task.id}" class="task-label ${task.completed ? 'task-completed' : ''}">
+                  ${task.text}
+                </label>
+              </div>
+              <div>
+                <button class="ff-btn ff-btn-icon ff-btn-sm edit-task" data-id="${task.id}">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="ff-btn ff-btn-icon ff-btn-sm ff-btn-danger delete-task" data-id="${task.id}">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            `;
+            
+            taskList.appendChild(taskItem);
+            
+            // Add event listener for checkbox
+            const checkbox = taskItem.querySelector('.task-checkbox');
+            checkbox.addEventListener('change', () => {
+              toggleTaskStatus(task.id);
+            });
+            
+            // Add event listener for edit button
+            const editBtn = taskItem.querySelector('.edit-task');
+            editBtn.addEventListener('click', () => {
+              editTask(task.id);
+            });
+            
+            // Add event listener for delete button
+            const deleteBtn = taskItem.querySelector('.delete-task');
+            deleteBtn.addEventListener('click', () => {
+              deleteTask(task.id);
+            });
+          });
+          
+          // Update task stats
+          updateTaskStats();
+        }
+        
+        // Add new task
+        function addTask() {
+          const modal = new FlexaFlow.Modal();
+          
+          const addTaskModal = modal.create({
+            id: 'add-task-modal',
+            title: 'Add New Task',
+            content: `
+              <div class="ff-form-group">
+                <label for="new-task-text">Task Description</label>
+                <input type="text" id="new-task-text" class="ff-input" placeholder="Enter task description">
+              </div>
+            `,
+            buttons: [
+              { text: 'Cancel', type: 'secondary', action: 'close' },
+              { 
+                text: 'Add Task', 
+                type: 'primary',
+                callback: () => {
+                  const taskText = document.getElementById('new-task-text').value.trim();
+                  
+                  if (taskText) {
+                    const newTask = {
+                      id: tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1,
+                      text: taskText,
+                      completed: false
+                    };
+                    
+                    tasks.push(newTask);
+                    loadTasks(currentFilter);
+                    toast.success('Task added successfully!');
+                    addTaskModal.close();
+                  } else {
+                    toast.error('Task description cannot be empty');
+                  }
+                }
+              }
+            ]
+          });
+          
+          addTaskModal.open();
+        }
+        
+        // Edit task
+        function editTask(taskId) {
+          const task = tasks.find(t => t.id === taskId);
+          if (!task) return;
+          
+          const modal = new FlexaFlow.Modal();
+          
+          const editTaskModal = modal.create({
+            id: 'edit-task-modal',
+            title: 'Edit Task',
+            content: `
+              <div class="ff-form-group">
+                <label for="edit-task-text">Task Description</label>
+                <input type="text" id="edit-task-text" class="ff-input" value="${task.text}">
+              </div>
+              <div class="ff-form-check">
+                <input type="checkbox" id="edit-task-status" class="ff-checkbox" ${task.completed ? 'checked' : ''}>
+                <label for="edit-task-status">Mark as completed</label>
+              </div>
+            `,
+            buttons: [
+              { text: 'Cancel', type: 'secondary', action: 'close' },
+              { 
+                text: 'Save Changes', 
+                type: 'primary',
+                callback: () => {
+                  const taskText = document.getElementById('edit-task-text').value.trim();
+                  const taskCompleted = document.getElementById('edit-task-status').checked;
+                  
+                  if (taskText) {
+                    task.text = taskText;
+                    task.completed = taskCompleted;
+                    
+                    loadTasks(currentFilter);
+                    toast.success('Task updated successfully!');
+                    editTaskModal.close();
+                  } else {
+                    toast.error('Task description cannot be empty');
+                  }
+                }
+              }
+            ]
+          });
+          
+          editTaskModal.open();
+        }
+        
+        // Delete task
+        function deleteTask(taskId) {
+          const modal = new FlexaFlow.Modal();
+          
+          const confirmModal = modal.create({
+            id: 'confirm-delete-task',
+            title: 'Confirm Delete',
+            content: '<p>Are you sure you want to delete this task?</p>',
+            buttons: [
+              { text: 'Cancel', type: 'secondary', action: 'close' },
+              { 
+                text: 'Delete', 
+                type: 'danger',
+                callback: () => {
+                  tasks = tasks.filter(t => t.id !== taskId);
+                  loadTasks(currentFilter);
+                  toast.success('Task deleted successfully!');
+                  confirmModal.close();
+                }
+              }
+            ]
+          });
+          
+          confirmModal.open();
+        }
+        
+        // Toggle task completed status
+        function toggleTaskStatus(taskId) {
+          const task = tasks.find(t => t.id === taskId);
+          if (task) {
+            task.completed = !task.completed;
+            toast.success(`Task marked as ${task.completed ? 'completed' : 'incomplete'}`);
+            
+            // Reload tasks to refresh the UI
+            loadTasks(currentFilter);
+          }
+        }
+        
+        // Update task statistics
+        function updateTaskStats() {
+          const totalTasks = tasks.length;
+          const completedTasks = tasks.filter(t => t.completed).length;
+          const pendingTasks = totalTasks - completedTasks;
+          
+          taskStats.textContent = `Total: ${totalTasks} | Completed: ${completedTasks} | Pending: ${pendingTasks}`;
+        }
+        
+        // Set up event listeners
+        addTaskBtn.addEventListener('click', addTask);
+        
+        // Filter buttons
+        filterAllBtn.addEventListener('click', () => {
+          setActiveFilter(filterAllBtn);
+          loadTasks('all');
+        });
+        
+        filterActiveBtn.addEventListener('click', () => {
+          setActiveFilter(filterActiveBtn);
+          loadTasks('active');
+        });
+        
+        filterCompletedBtn.addEventListener('click', () => {
+          setActiveFilter(filterCompletedBtn);
+          loadTasks('completed');
+        });
+        
+        // Set active filter button
+        function setActiveFilter(button) {
+          [filterAllBtn, filterActiveBtn, filterCompletedBtn].forEach(btn => {
+            btn.classList.remove('ff-active');
+          });
+          button.classList.add('ff-active');
+        }
+        
+        // Initialize task list
+        loadTasks();
+      }
+      
+      // Dark Mode Toggle
+      function initDarkModeToggle() {
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const icon = darkModeToggle.querySelector('i');
+        
+        // Check for saved preference
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'enabled';
+        
+        // Set initial state
+        if (darkModeEnabled) {
+          document.documentElement.classList.add('ff-dark-mode');
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        }
+        
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+          document.documentElement.classList.toggle('ff-dark-mode');
+          
+          if (document.documentElement.classList.contains('ff-dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+          } else {
+            localStorage.setItem('darkMode', null);
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+/* src/styles/animations.css */
+
+/**
+ * FlexaFlow Animations
+ * A collection of reusable CSS animations
+ */
+
+/* Base Animation Classes */
+[class*="ff-animate-"] {
+    animation-duration: var(--ff-animation-duration, 0.5s);
+    animation-timing-function: var(--ff-animation-timing, ease);
+    animation-fill-mode: both;
+  }
+  
+  /* Fade In */
+  @keyframes ff-fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .ff-animate-fade-in {
+    animation-name: ff-fadeIn;
+  }
+  
+  /* Fade Out */
+  @keyframes ff-fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  .ff-animate-fade-out {
+    animation-name: ff-fadeOut;
+  }
+  
+  /* Slide Up */
+  @keyframes ff-slideUp {
+    from {
+      transform: translate3d(0, 20px, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  .ff-animate-slide-up {
+    animation-name: ff-slideUp;
+  }
+  
+  /* Slide Down */
+  @keyframes ff-slideDown {
+    from {
+      transform: translate3d(0, -20px, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  .ff-animate-slide-down {
+    animation-name: ff-slideDown;
+  }
+  
+  /* Slide In From Right */
+  @keyframes ff-slideInRight {
+    from {
+      transform: translate3d(20px, 0, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  .ff-animate-slide-in-right {
+    animation-name: ff-slideInRight;
+  }
+  
+  /* Slide In From Left */
+  @keyframes ff-slideInLeft {
+    from {
+      transform: translate3d(-20px, 0, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  .ff-animate-slide-in-left {
+    animation-name: ff-slideInLeft;
+  }
+  
+  /* Scale In */
+  @keyframes ff-scaleIn {
+    from {
+      transform: scale3d(0.95, 0.95, 1);
+      opacity: 0;
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+      opacity: 1;
+    }
+  }
+  
+  .ff-animate-scale-in {
+    animation-name: ff-scaleIn;
+  }
+  
+  /* Scale Out */
+  @keyframes ff-scaleOut {
+    from {
+      transform: scale3d(1, 1, 1);
+      opacity: 1;
+    }
+    to {
+      transform: scale3d(0.95, 0.95, 1);
+      opacity: 0;
+    }
+  }
+  
+  .ff-animate-scale-out {
+    animation-name: ff-scaleOut;
+  }
+  
+  /* Bounce */
+  @keyframes ff-bounce {
+    from,
+    20%,
+    53%,
+    80%,
+    to {
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: translate3d(0, 0, 0);
+    }
+    40%,
+    43% {
+      animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      transform: translate3d(0, -20px, 0);
+    }
+    70% {
+      animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      transform: translate3d(0, -10px, 0);
+    }
+    90% {
+      transform: translate3d(0, -4px, 0);
+    }
+  }
+  
+  .ff-animate-bounce {
+    animation-name: ff-bounce;
+    transform-origin: center bottom;
+  }
+  
+  /* Pulse */
+  @keyframes ff-pulse {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+    50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .ff-animate-pulse {
+    animation-name: ff-pulse;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+  }
+  
+  /* Shake */
+  @keyframes ff-shake {
+    from,
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translate3d(-5px, 0, 0);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translate3d(5px, 0, 0);
+    }
+  }
+  
+  .ff-animate-shake {
+    animation-name: ff-shake;
+  }
+  
+  /* Rotate */
+  @keyframes ff-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .ff-animate-rotate {
+    animation-name: ff-rotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+  }
+  
+  /* Flip */
+  @keyframes ff-flip {
+    from {
+      transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      animation-timing-function: ease-out;
+    }
+    40% {
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+      animation-timing-function: ease-out;
+    }
+    50% {
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+      animation-timing-function: ease-in;
+    }
+    80% {
+      transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      animation-timing-function: ease-in;
+    }
+    to {
+      transform: perspective(400px);
+      animation-timing-function: ease-in;
+    }
+  }
+  
+  .ff-animate-flip {
+    animation-name: ff-flip;
+    backface-visibility: visible;
+  }
+  
+  /* Toast Slide In */
+  @keyframes ff-toastSlideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .ff-toast-enter {
+    animation-name: ff-toastSlideIn;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+  }
+  
+  /* Toast Slide Out */
+  @keyframes ff-toastSlideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  .ff-toast-exit {
+    animation-name: ff-toastSlideOut;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+  }
+  
+  /* Modal Animation */
+  @keyframes ff-modalFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes ff-modalScaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .ff-modal-backdrop-enter {
+    animation: ff-modalFadeIn 0.3s ease forwards;
+  }
+  
+  .ff-modal-content-enter {
+    animation: ff-modalScaleIn 0.3s ease forwards;
+  }
+  
+  @keyframes ff-modalFadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes ff-modalScaleOut {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+  }
+  
+  .ff-modal-backdrop-exit {
+    animation: ff-modalFadeOut 0.3s ease forwards;
+  }
+  
+  .ff-modal-content-exit {
+    animation: ff-modalScaleOut 0.3s ease forwards;
+  }
+  
+  /* Tab Transitions */
+  @keyframes ff-tabFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .ff-tab-panel-enter {
+    animation: ff-tabFadeIn 0.3s ease forwards;
+  }
+  
+  /* Spinner/Loader Animation */
+  @keyframes ff-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .ff-spinner {
+    animation: ff-spin 1s linear infinite;
+  }
+  
+  /* Attention Grabber */
+  @keyframes ff-pulse-attention {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.85;
+    }
+  }
+  
+  .ff-animate-attention {
+    animation: ff-pulse-attention 2s infinite;
+  }
+  
+  /* Progress Bar Animation */
+  @keyframes ff-progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  .ff-animate-progress {
+    animation: ff-progress var(--ff-progress-duration, 3s) linear forwards;
+  }
+  
+  /* Typing Effect */
+  @keyframes ff-typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes ff-blink-caret {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: currentColor;
+    }
+  }
+  
+  .ff-animate-typing {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid;
+    width: 0;
+    animation: 
+      ff-typing var(--ff-typing-duration, 3.5s) steps(var(--ff-typing-steps, 40), end) forwards,
+      ff-blink-caret 0.75s step-end infinite;
+  }
+  
+  /* Animation Delay Classes */
+  .ff-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .ff-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .ff-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .ff-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .ff-delay-500 {
+    animation-delay: 500ms;
+  }
+  
+  .ff-delay-700 {
+    animation-delay: 700ms;
+  }
+  
+  .ff-delay-1000 {
+    animation-delay: 1000ms;
+  }
+  
+  /* Animation Duration Classes */
+  .ff-duration-fast {
+    animation-duration: 300ms;
+  }
+  
+  .ff-duration-normal {
+    animation-duration: 500ms;
+  }
+  
+  .ff-duration-slow {
+    animation-duration: 800ms;
+  }
+  
+  .ff-duration-slower {
+    animation-duration: 1200ms;
+  }
+  
+  /* Reduce Motion Preferences */
+  @media (prefers-reduced-motion: reduce) {
+    [class*="ff-animate-"] {
+      animation: none !important;
+      transition: none !important;
+    }
+  }

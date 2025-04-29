@@ -1,0 +1,69 @@
+{
+    "name": "flexaflow",
+    "version": "1.0.0",
+    "description": "A modern UI component library for building interactive web interfaces",
+    "main": "dist/flexaflow.min.js",
+    "module": "src/index.js",
+    "style": "dist/flexaflow.min.css",
+    "files": [
+      "dist",
+      "src"
+    ],
+    "scripts": {
+      "build": "webpack --mode production",
+      "dev": "webpack --mode development --watch",
+      "test": "jest",
+      "lint": "eslint src/**/*.js",
+      "prepare": "npm run build"
+    },
+    "keywords": [
+      "ui",
+      "components",
+      "javascript",
+      "ui-library",
+      "frontend",
+      "web-components",
+      "design-system",
+      "responsive",
+      "interface",
+      "modal",
+      "toast",
+      "dropdown",
+      "tabs"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yourusername/flexaflow.git"
+    },
+    "bugs": {
+      "url": "https://github.com/yourusername/flexaflow/issues"
+    },
+    "homepage": "https://github.com/yourusername/flexaflow#readme",
+    "devDependencies": {
+      "@babel/core": "^7.16.0",
+  "@babel/preset-env": "^7.16.0",
+  "autoprefixer": "^10.4.0",
+  "babel-loader": "^8.2.3",
+  "clean-webpack-plugin": "^4.0.0",
+  "core-js": "^3.19.1",
+  "css-loader": "^6.5.1",
+  "css-minimizer-webpack-plugin": "^3.2.0",
+  "cssnano": "^5.0.10",
+  "eslint": "^8.2.0",
+  "jest": "^27.3.1",
+  "mini-css-extract-plugin": "^2.4.4",
+  "postcss": "^8.3.11",
+  "postcss-loader": "^6.2.0",
+  "style-loader": "^3.3.1",
+  "terser-webpack-plugin": "^5.2.5",
+  "webpack": "^5.64.0",
+  "webpack-cli": "^4.9.1"
+    },
+    "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  }

@@ -1,0 +1,179 @@
+/* src/styles/variables.css */
+
+/**
+ * FlexaFlow UI Library
+ * CSS Variables for theming and customization
+ */
+
+ :root {
+    /* Color Palette */
+    --ff-primary-color: #10b981;
+    --ff-primary-hover: #059669;
+    --ff-primary-light: #d1fae5;
+    --ff-primary-dark: #047857;
+    
+    --ff-secondary-color: #3b82f6;
+    --ff-secondary-hover: #2563eb;
+    --ff-secondary-light: #dbeafe;
+    --ff-secondary-dark: #1d4ed8;
+    
+    --ff-danger-color: #ef4444;
+    --ff-danger-hover: #dc2626;
+    --ff-danger-light: #fee2e2;
+    --ff-danger-dark: #b91c1c;
+    
+    --ff-warning-color: #f59e0b;
+    --ff-warning-hover: #d97706;
+    --ff-warning-light: #fef3c7;
+    --ff-warning-dark: #b45309;
+    
+    --ff-info-color: #3b82f6;
+    --ff-info-hover: #2563eb;
+    --ff-info-light: #dbeafe;
+    --ff-info-dark: #1d4ed8;
+    
+    --ff-success-color: #10b981;
+    --ff-success-hover: #059669;
+    --ff-success-light: #d1fae5;
+    --ff-success-dark: #047857;
+    
+    /* Grayscale */
+    --ff-white: #ffffff;
+    --ff-gray-50: #f9fafb;
+    --ff-gray-100: #f3f4f6;
+    --ff-gray-200: #e5e7eb;
+    --ff-gray-300: #d1d5db;
+    --ff-gray-400: #9ca3af;
+    --ff-gray-500: #6b7280;
+    --ff-gray-600: #4b5563;
+    --ff-gray-700: #374151;
+    --ff-gray-800: #1f2937;
+    --ff-gray-900: #111827;
+    --ff-black: #000000;
+    
+    /* Typography */
+    --ff-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                      'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 
+                      'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --ff-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 
+                           'Liberation Mono', 'Courier New', monospace;
+    
+    --ff-font-size-xs: 0.75rem;   /* 12px */
+    --ff-font-size-sm: 0.875rem;  /* 14px */
+    --ff-font-size-md: 1rem;      /* 16px */
+    --ff-font-size-lg: 1.125rem;  /* 18px */
+    --ff-font-size-xl: 1.25rem;   /* 20px */
+    --ff-font-size-2xl: 1.5rem;   /* 24px */
+    --ff-font-size-3xl: 1.875rem; /* 30px */
+    --ff-font-size-4xl: 2.25rem;  /* 36px */
+    
+    --ff-line-height-tight: 1.25;
+    --ff-line-height-normal: 1.5;
+    --ff-line-height-loose: 1.75;
+    
+    --ff-font-weight-light: 300;
+    --ff-font-weight-normal: 400;
+    --ff-font-weight-medium: 500;
+    --ff-font-weight-semibold: 600;
+    --ff-font-weight-bold: 700;
+    
+    /* Spacing */
+    --ff-spacing-0: 0;
+    --ff-spacing-px: 1px;
+    --ff-spacing-0-5: 0.125rem;  /* 2px */
+    --ff-spacing-1: 0.25rem;     /* 4px */
+    --ff-spacing-1-5: 0.375rem;  /* 6px */
+    --ff-spacing-2: 0.5rem;      /* 8px */
+    --ff-spacing-2-5: 0.625rem;  /* 10px */
+    --ff-spacing-3: 0.75rem;     /* 12px */
+    --ff-spacing-3-5: 0.875rem;  /* 14px */
+    --ff-spacing-4: 1rem;        /* 16px */
+    --ff-spacing-5: 1.25rem;     /* 20px */
+    --ff-spacing-6: 1.5rem;      /* 24px */
+    --ff-spacing-8: 2rem;        /* 32px */
+    --ff-spacing-10: 2.5rem;     /* 40px */
+    --ff-spacing-12: 3rem;       /* 48px */
+    --ff-spacing-16: 4rem;       /* 64px */
+    --ff-spacing-20: 5rem;       /* 80px */
+    --ff-spacing-24: 6rem;       /* 96px */
+    --ff-spacing-32: 8rem;       /* 128px */
+    
+    /* Borders */
+    --ff-border-radius-none: 0;
+    --ff-border-radius-sm: 0.125rem;   /* 2px */
+    --ff-border-radius-md: 0.375rem;   /* 6px */
+    --ff-border-radius-lg: 0.5rem;     /* 8px */
+    --ff-border-radius-xl: 0.75rem;    /* 12px */
+    --ff-border-radius-2xl: 1rem;      /* 16px */
+    --ff-border-radius-3xl: 1.5rem;    /* 24px */
+    --ff-border-radius-full: 9999px;
+    
+    --ff-border-width-0: 0;
+    --ff-border-width-1: 1px;
+    --ff-border-width-2: 2px;
+    --ff-border-width-4: 4px;
+    --ff-border-width-8: 8px;
+    
+    /* Shadows */
+    --ff-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --ff-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --ff-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --ff-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --ff-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --ff-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    --ff-shadow-none: 0 0 #0000;
+    
+    /* Z-index values */
+    --ff-z-0: 0;
+    --ff-z-10: 10;
+    --ff-z-20: 20;
+    --ff-z-30: 30;
+    --ff-z-40: 40;
+    --ff-z-50: 50;
+    --ff-z-auto: auto;
+    
+    /* Transitions */
+    --ff-transition-duration: 150ms;
+    --ff-transition-duration-medium: 300ms;
+    --ff-transition-duration-slow: 500ms;
+    --ff-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Focus Ring */
+    --ff-focus-ring-width: 3px;
+    --ff-focus-ring-color: rgba(59, 130, 246, 0.5);
+    
+    /* Dark Mode Colors - can be overridden by users */
+    --ff-dark-bg: var(--ff-gray-800);
+    --ff-dark-text: var(--ff-gray-100);
+    
+    /* Component-specific variables */
+    --ff-toast-width: 320px;
+    --ff-toast-z-index: var(--ff-z-50);
+    
+    --ff-modal-backdrop-bg: rgba(0, 0, 0, 0.5);
+    --ff-modal-z-index: var(--ff-z-40);
+    
+    --ff-dropdown-z-index: var(--ff-z-30);
+    --ff-dropdown-min-width: 200px;
+    
+    /* Animation Speeds */
+    --ff-animation-duration-fast: 150ms;
+    --ff-animation-duration-normal: 300ms;
+    --ff-animation-duration-slow: 500ms;
+    --ff-animation-duration-slower: 1000ms;
+  }
+  
+  /* Dark Theme Variables */
+  .ff-dark-mode, [data-ff-theme="dark"] {
+    --ff-primary-light: var(--ff-primary-dark);
+    
+    --ff-bg-color: var(--ff-gray-900);
+    --ff-text-color: var(--ff-gray-100);
+    --ff-border-color: var(--ff-gray-700);
+    
+    /* Component-specific dark mode overrides */
+    --ff-card-bg: var(--ff-gray-800);
+    --ff-input-bg: var(--ff-gray-700);
+    --ff-input-text: var(--ff-white);
+    --ff-input-border: var(--ff-gray-600);
+  }
