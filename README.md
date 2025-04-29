@@ -2,7 +2,7 @@
 
 A modern, flexible UI component library for building interactive web interfaces.
 
-![FlexaFlow Banner](https://via.placeholder.com/1200x300/4a90e2/ffffff?text=FlexaFlow+UI+Components)
+![FlexaFlow Banner](https://github.com/techbire/FlexaFlow/blob/main/src/logo.png)
 
 [![npm version](https://img.shields.io/npm/v/flexaflow.svg?style=flat-square)](https://www.npmjs.org/package/flexaflow)
 [![npm downloads](https://img.shields.io/npm/dm/flexaflow.svg?style=flat-square)](http://npm-stat.com/charts.html?package=flexaflow)
